@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AppTempoAgoraSQLite.Models;
 using Newtonsoft.Json.Linq;
-using AppTempoAgoraSQLite.Models;
 
 namespace AppTempoAgoraSQLite.Services
 {
-    public class DataService
+    public class Service
     {
         public static async Task<Tempo?> GetPrevisao(string cidade)
         {
@@ -18,6 +13,7 @@ namespace AppTempoAgoraSQLite.Services
 
             string url = $"https://api.openweathermap.org/data/2.5/weather?" +
                          $"q={cidade}&units=metric&appid={chave}";
+
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage resp = await client.GetAsync(url);
@@ -36,7 +32,7 @@ namespace AppTempoAgoraSQLite.Services
                     {
                         lat = (double)rascunho["coord"]["lat"],
                         lon = (double)rascunho["coord"]["lon"],
-                        description = (string)rascunho["wather"][0]["description"],
+                        description = (string)rascunho["weather"][0]["description"],
                         main = (string)rascunho["weather"][0]["main"],
                         temp_min = (double)rascunho["main"]["temp_min"],
                         temp_max = (double)rascunho["main"]["temp_max"],
@@ -44,9 +40,10 @@ namespace AppTempoAgoraSQLite.Services
                         visibility = (int)rascunho["visibility"],
                         sunrise = sunrise.ToString(),
                         sunset = sunset.ToString(),
-                    };
-                }
-            }
+                    }; // Fecha obj do Tempo.
+                } // Fecha if se o status do servidor foi de sucesso
+            } // fecha laço using
+
             return t;
         }
     }
