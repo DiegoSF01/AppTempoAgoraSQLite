@@ -5,14 +5,27 @@
 
     <ScrollView>
         <VerticalStackLayout
-         Padding="30,0"
-         Spacing="25">
+            Padding="30,0"
+            Spacing="25">
 
-            <Entry x:Name="txt_cidade" />
-            <Button Text="Buscar Previsão" Clicked="Button_Clicked" />
+            <Entry x:Name="txt_cidade" Placeholder="Digite a cidade." />
+            <Button Text="Buscar Previsão" Clicked="ButtonPrevisao_Clicked" />
 
             <Label x:Name="lbl_res" />
 
+            <StackLayout>
+                <SearchBar x:Name="txt_search"
+                           Margin="15, 0, 15, 0"
+                           Placeholder="Buscar Previsão"
+                           TextChanged="txt_search_TextChanged"/>
+
+                <ListView x:Name="lst_historico"
+                          IsPullToRefreshEnabled="True"
+                          Refreshing="lst_historico_Refreshing"
+                          ItemSelected="lst_historico_ItemSelected">
+
+                </ListView>
+            </StackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
