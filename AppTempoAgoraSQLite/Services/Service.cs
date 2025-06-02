@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace AppTempoAgoraSQLite.Services
 {
-    public class Service
+    public class DataService
     {
         public static async Task<Tempo?> GetPrevisao(string cidade)
         {
